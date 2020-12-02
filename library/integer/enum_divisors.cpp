@@ -1,3 +1,5 @@
+// 入力Nの約数を列挙するプログラム
+
 #include <iostream>
 #include <cmath>
 #include <set>
