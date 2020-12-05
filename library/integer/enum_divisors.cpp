@@ -1,23 +1,28 @@
 // 入力Nの約数を列挙するプログラム
 
 #include <iostream>
-#include <cmath>
-#include <set>
+#include <vector>
+#include <algorithm>
+using namespace std;
 
-int main() {
-    long long int n;
-    std::cin >> n;
-
-    std::set<long long int> st;
-    
-    for(long long int i = 1; i * i <= n; i++) {
-        if(n % i == 0) {
-            st.insert(i);
-            st.insert(n/i);
+vector<long long> enum_divisors(long long N) {
+    vector<long long> res;
+    for (long long i = 1; i * i <= N; ++i) {
+        if (N % i == 0) {
+            res.push_back(i);
+            // 重複しないならば i の相方である N/i も push
+            if (N/i != i) res.push_back(N/i);
         }
     }
+    // 小さい順にソート
+    sort(res.begin(), res.end());
+    return res;
+}
 
-    for(auto x:st) std::cout << x << std::endl;
-
-    return 0;
+int main() {
+    long long N;
+    cin >> N;
+    const vector<long long> res = enum_divisors(N);
+    for (int i = 0; i < res.size(); ++i) cout << res[i] << " ";
+    cout << endl;
 }
