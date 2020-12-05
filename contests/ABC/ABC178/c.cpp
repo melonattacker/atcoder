@@ -19,6 +19,7 @@ int main() {
 
     ans = powmod(10, n) - powmod(9, n) - powmod(9, n) + powmod(8, n);
 
+    // この時点でansが-1000000007より小さい場合をカバーするために以下のように計算
     ans = ans % mod;
     ans = (ans + mod) % mod;
 
