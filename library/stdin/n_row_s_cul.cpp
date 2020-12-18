@@ -1,15 +1,15 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 int main() {
-    int n, s;
-    std::cin >> n >> s;
+    int N, S;
+    cin >> N >> S;
 
-    std::vector<std::vector<int>> input(n, std::vector<int>(s));
+    vector<vector<int>> input(N, vector<int>(S));
 
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < s; j++) {
-            std::cin >> input[i][j];
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < S; j++) {
+            cin >> input[i][j];
         }
     }
 
