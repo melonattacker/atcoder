@@ -1,46 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+
+// 入力
+int N, M, Q;
+vector<long long> a, b, c, d;
+
+// 数列 A のスコアを計算
+long long score(const vector<int> &A) {
+    long long res = 0;
+    for (int i = 0; i < Q; ++i) if (A[b[i]] - A[a[i]] == c[i]) res += d[i];
+    return res;
+}
+
+// 数列 A に要素を付け加えて行って、最終的にできる数列のうちの
+// スコアの最大値を返す
+// 特に、最初の呼出しに対する返り値が答え
+long long dfs(vector<int> &A) {
+    if (A.size() == N) {
+        // for(int i = 0; i < (int) A.size(); i++) {
+        //     cout << A[i] + 1;
+        // }
+        // cout << endl;
+        return score(A);
+    }
+    long long res = 0;
+    int prev_last = (A.empty() ? 0 : A.back());
+    // 単調増加
+    for (int add = prev_last; add < M; ++add) {
+        A.push_back(add);
+        res = max(res, dfs(A)); // 再帰呼出しながら、スコア最大値を更新
+        A.pop_back();
+    }
+    return res;
+}
 
 int main() {
-    // int N, M, Q;
-    // cin >> N >> M >> Q;
-
-    // vector<vector<int>> input(Q, vector<int>(4));
-
-    // for(int i = 0; i < Q; i++) {
-    //     for(int j = 0; j < 4; j++) {
-    //         cin >> input[i][j];
-    //     }
-    // }
-
-    int N = 3;
-    int M = 4;
-
-    vector<vector<int>> comb;
-
-    for (int bit = 0; bit < (1<<M+1); ++bit) {
-        int count = 0;
-        vector<int> S;
-        for (int i = 0; i < M; ++i) {
-            if (bit & (1<<i)) { // "bit"のi桁目が1かどうかチェック
-                count++;
-                S.push_back(i+1);
-            }
-        }
-
-        if(count == N) {
-            comb.push_back(S);
-        }
+    cin >> N >> M >> Q;
+    a.resize(Q); b.resize(Q); c.resize(Q); d.resize(Q);
+    for (int q = 0; q < Q; ++q) {
+        cin >> a[q] >> b[q] >> c[q] >> d[q];
+        --a[q], --b[q];
     }
-
-    for(int j = 0; j < (int)comb.size(); j++) {
-        cout << j << ": {";
-        for (int i = 0; i < 3; ++i) {
-            cout << comb[j][i] << " ";
-        }
-        cout << "}" << endl;
-    }
-
-    return 0;
+    vector<int> A;
+    cout << dfs(A) << endl;
 }
