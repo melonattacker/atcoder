@@ -3,19 +3,21 @@ using namespace std;
 typedef long long ll;
 
 int main() {
-    int N;
-    cin >> N;
+    int N, M;
+    cin >> N >> M;
 
-    unordered_map<int, int> mp;
+    long long amount = 0;
 
-    for(int i = 1; i < N; i++) {
-        int num ;
-        cin >> num;
-        mp[num]++;
+    for(int i = 0; i < M; i++) {
+        int time;
+        cin >> time;
+        amount += time;
     }
 
-    for(int i = 1; i < N + 1; i++) {
-        cout << mp[i] << endl;
+    if(N >= amount) {
+        cout << N - amount << endl;
+    } else {
+        cout << -1 << endl;
     }
 
     return 0;
