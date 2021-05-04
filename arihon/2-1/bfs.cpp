@@ -1,4 +1,4 @@
-// 2-1 例題: 迷路の最短路
+// 例題: 迷路の最短路
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;

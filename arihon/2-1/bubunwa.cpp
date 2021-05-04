@@ -1,4 +1,4 @@
-// 2-1 例題: 部分和問題
+// 例題: 部分和問題
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
