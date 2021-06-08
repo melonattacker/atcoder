@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
+const int INF = 100000000;
 
 int main() {
     int N, S;
