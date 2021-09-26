@@ -8,14 +8,14 @@ int main() {
     int N;
     cin >> N;
 
-    vector<int> x(N);
+    vector<double> x(N);
     vector<string> u(N);
 
     for(int i = 0; i < N; i++) {
         cin >> x[i] >> u[i];
     }
 
-    ll ans = 0;
+    long double ans = 0;
 
     for(int i = 0; i < N; i++) {
         if(u[i] == "BTC") {
@@ -24,6 +24,8 @@ int main() {
             ans += x[i];
         }
     }
+
+    cout << ans << endl;
 
     return 0;
 }
