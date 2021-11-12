@@ -5,30 +5,24 @@ typedef long long ll;
 const long long INF = 1LL << 60;
 
 int main() {
-    ll T;
-    cin >> T;
+    int t;
+    cin >> t;
 
-    vector<ll> N(T);
-    vector<ll> M(T);
-
-    for(int i = 0; i < T; i++) {
-        cin >> N[i] >> M[i];
-    }
-
-
-    for(int i = 0; i < T; i++) {
-        ll mini = max(N[i] - M[i], (ll)1);
-        ll left = 0, right = 1000000001;
-        while (right - left > 1) {
-            ll mid = (left + right) / 2;
-            if (mid * (mid-1)/2 < M[i]) left = mid;
-            else right = mid;
+    while(t>0) {
+        t--;
+        ll n, m;
+        cin >> n >> m;
+        cout << max(1ll, n-m) << ' ';
+        ll st = 1, fi = 1500000000, te;
+        while(st <= fi) {
+            te = (st + fi)/2;
+            if((te * (te-1))/2 < m) {
+                st = te + 1;
+            } else {
+                fi = te - 1;
+            }
         }
-
-        // cout << right << endl;
-        ll maxi = N[i] - right + 1;
-
-        cout << mini << " " << maxi << endl;
+        cout << n-st+1 << endl; // n-st : ぼっちになった数
     }
 
     return 0;
