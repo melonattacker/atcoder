@@ -11,16 +11,28 @@ template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } 
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 
 int main() {
-    int N, S;
-    cin >> N >> S;
+    int N, M;
+    cin >> N >> M;
+    priority_queue<int> q;
 
-    vector<vector<int>> input(N, vector<int>(S));
-
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < S; j++) {
-            cin >> input[i][j];
-        }
+    rep(i, 0, N) {
+        int a;
+        cin >> a;
+        q.push(a);
     }
 
+    rep(i, 0, M) {
+        int a = q.top(); 
+        q.pop();
+        q.push(a/2);
+    }
+
+    ll ans = 0;
+    rep(i, 0, N) {
+        ans += q.top();
+        q.pop();
+    }
+
+    cout << ans << endl;
     return 0;
 }
