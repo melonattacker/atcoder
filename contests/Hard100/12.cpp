@@ -10,18 +10,36 @@ template<class T> using VV = vector<vector<T>>;
 template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
 template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 
-int main() {
-    int N, S;
-    cin >> N >> S;
+int cnt[101010];
+int MOD = 998244353;
 
-    vector<vector<int>> input(N, vector<int>(S));
-    VV<int> v(N, V<int>(S, 1e9));
-    
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < S; j++) {
-            cin >> input[i][j];
-        }
+int main() {
+    int N;
+    cin >> N;
+
+    V<int> D(N);
+
+    rep(i, 0, N) cin >> D[i];
+
+    if(D[0] != 0) {
+        cout << "0" << endl;
+        return 0;
     }
+
+    int maxD = 0;
+    rep(i, 0, N) chmax(maxD, D[i]);
+    rep(i, 0, N) ++cnt[D[i]];
+    if(cnt[0] != 1) {
+        cout << "0" << endl;
+        return 0;
+    }
+
+    ll ans = 1;
+    rep(i, 1, maxD+1) rep(j, 0, cnt[i]) {
+        ans = ans * cnt[i-1] % MOD;
+    }
+
+    cout << ans << endl;
 
     return 0;
 }
