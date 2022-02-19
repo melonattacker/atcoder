@@ -1,38 +1,40 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define rrep(i,a,b) for(int i=a;i>=b;i--)
+#define fore(i,a) for(auto &i:a)
+#define all(x) (x).begin(),(x).end()
 using namespace std;
-typedef long long ll;
-// const int INF = 100000000;
-const long long INF = 1LL << 60;
+using namespace atcoder;
+using mint = modint1000000007;
+using Graph = vector<vector<int>>;
+typedef long long ll; const int inf = INT_MAX / 2; const ll infl = 1LL << 60;
+template<class T> using V = vector<T>;
+template<class T> using VV = vector<vector<T>>;
+template<class T>bool chmax(T& a, const T& b) { if (a < b) { a = b; return 1; } return 0; }
+template<class T>bool chmin(T& a, const T& b) { if (b < a) { a = b; return 1; } return 0; }
 
 int main() {
-    int N, Q;
-    cin >> N >> Q;
+    int n, q;
+    cin >> n >> q;
 
-    vector<ll> A(N);
+    vector<ll> a(n);
+    vector<ll> k(q);
+    rep(i, 0, n) cin >> a[i];
+    rep(i, 0, q) cin >> k[i];
 
-    for(int i = 0; i < N; i++) {
-        cin >> A[i];
-    }
-
-    vector<ll> low(N);
-
-    for(int i = 0; i < N; i++) {
-        low[i] = A[i] - (i+1);
-    }
-
-    for(int i = 0; i < N; i++) {
-        cout << low[i] << endl;
-    }
-
-    while (Q--) {
-        long long K;
-        cin >> K;
-        const int idx = lower_bound(low.begin(), low.end(), K) - low.begin();
-        if (idx == N) {
-            cout << A[N - 1] + (K - low[N - 1]) << '\n';
+    vector<ll> c(n);
+    rep(i, 0, n) c[i] = a[i]-i-1;
+    rep(i, 0, q) {
+        int r = lower_bound(c.begin(), c.end(), k[i])-c.begin();
+        ll ans;
+        if(r == 0) {
+            ans = k[i];
         } else {
-            cout << A[idx] - (low[idx] - K + 1) << '\n';
+            ans = a[r-1]+(k[i]-c[r-1]);
+
         }
-    }
+        cout << ans << endl;
+    } 
     return 0;
 }
